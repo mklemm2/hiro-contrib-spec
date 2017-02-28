@@ -1,28 +1,30 @@
-%{?scl:%scl_package python-ordereddict}
+%{?scl:%scl_package python-requests-kerberos}
 %{!?scl:%global pkg_name %{name}}
 
-%global pypi_name ordereddict
+%global pypi_name requests-kerberos
 
-Name:           %{?scl_prefix}python-ordereddict
-Version:        1.1
+Name:           %{?scl_prefix}python-requests-kerberos
+Version:        0.11.0
 Release:        1%{?dist}
-Summary:        None
+Summary:        A Kerberos authentication handler for python-requests
 
-License:        MIT
-URL:            None
-Source0:        https://files.pythonhosted.org/packages/source/o/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+License:        ISC
+URL:            https://github.com/requests/requests-kerberos
+Source0:        https://files.pythonhosted.org/packages/source/r/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  %{?scl_prefix_python}python-devel
 BuildRequires:  %{?scl_prefix_python}python-setuptools
 %{?scl:BuildRequires: %{scl}-build %{scl}-runtime}
 %{?scl:Requires: %{scl}-runtime}
+%{?scl:Requires: %{scl}-python-requests}
+%{?scl:Requires: %{scl}-python-pykerberos}
 
 %description
-Drop-in substitute for Py2.7's new collections.OrderedDict. The recipe has big-
-oh performance that matches regular dictionaries (amortized O(1)
-insertion/deletion/lookup and O(n) iteration/repr/copy/equality_testing).
-Originally based on http://code.activestate.com/recipes/576693/
+Requests is an HTTP library, written in Python,
+for human beings. This library adds optional
+Kerberos/GSSAPI authentication support and
+supports mutual authentication.
 
 %prep
 %setup -q -n %{pypi_name}-%{version}
@@ -41,8 +43,7 @@ Originally based on http://code.activestate.com/recipes/576693/
 %{?scl:"}
 
 %files
-%{python_sitelib}/%{pypi_name}*
-%{python_sitelib}/__pycache__/
+%{python_sitelib}/requests_kerberos*
 
 %changelog
 * Wed Jan 22 2014 John Doe <jdoe@example.com> - 1.9.1-1

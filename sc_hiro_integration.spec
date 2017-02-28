@@ -20,9 +20,9 @@
 
 Summary: Package that installs %scl
 Name: %scl_name
-Version: 1
+Version: 1.2
 Release: 1%{?dist}
-License: GPLv2+
+License: MIT
 BuildRequires: scl-utils-build
 # Always make sure that there is the python37-sclbuild (or rh-python35-sclbuild)
 # package in the build root
@@ -70,6 +70,8 @@ cat >> %{buildroot}%{_scl_scripts}/enable << EOF
 . scl_source enable %{scl_python}
 export PYTHONPATH="%{hiro_integration_sitelib}\${PYTHONPATH:+:\${PYTHONPATH}}"
 export PATH=%{_bindir}\${PATH:+:\${PATH}}
+export PYTHON_DATADIR=/opt/rh/%{scl}/root/usr/share
+
 EOF
 
 mkdir -p %{buildroot}%{hiro_integration_sitelib}
@@ -90,6 +92,7 @@ cat >> %{buildroot}%{_root_sysconfdir}/rpm/macros.%{scl}-config << EOF
 %%global python2_sitelib %hiro_integration_sitelib
 %%global python_includedir /opt/rh/%{scl}/root/usr/include/python3.4m
 %%global python_scriptdir /opt/rh/%{scl}/root/usr/bin
+%%global python_sharedir /opt/rh/%{scl}/root/usr/share
 }
 EOF
 

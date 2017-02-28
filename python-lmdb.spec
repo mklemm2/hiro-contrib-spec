@@ -1,33 +1,30 @@
-%{?scl:%scl_package python-lxml}
+%{?scl:%scl_package python-lmdb}
 %{!?scl:%global pkg_name %{name}}
 
-%global pypi_name lxml
+%global pypi_name lmdb
 
-Name:           %{?scl_prefix}python-lxml
-Version:        3.7.2
+Name:           %{?scl_prefix}python-lmdb
+Version:        0.92
 Release:        1%{?dist}
-Summary:        Powerful and Pythonic XML processing library combining libxml2/libxslt with the ElementTree API
+Summary:        Universal Python binding for the LMDB 'Lightning' Database
 
-License:        BSD
-URL:            http://lxml.de/
-Source0:        https://files.pythonhosted.org/packages/source/l/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+License:        OpenLDAP BSD
+URL:            https://github.com/dw/py-lmdb
+Source0:        https://files.pythonhosted.org/packages/source/g/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 
 BuildArch:      x86_64
 BuildRequires:  %{?scl_prefix_python}python-devel
 BuildRequires:  %{?scl_prefix_python}python-setuptools
 BuildRequires:  gcc
-BuildRequires:  libxml2-devel
-BuildRequires:  libxslt-devel
 %{?scl:BuildRequires: %{scl}-build %{scl}-runtime}
 %{?scl:Requires: %{scl}-runtime}
-Requires:  libxml2
-Requires:  libxslt
 
 %description
-lxml is a Pythonic, mature binding for the libxml2 and libxslt libraries. It
-provides safe and convenient access to these libraries using the ElementTree It
-extends the ElementTree API significantly to offer support for XPath, RelaxNG,
-XML Schema, XSLT, C14N and much more.
+This is a universal Python binding for the LMDB ‘Lightning’ Database.
+Two variants are provided and automatically selected during install:
+a CFFI variant that supports PyPy and all versions of CPython >=2.6,
+and a C extension that supports CPython 2.5-2.7 and >=3.3.
+Both variants provide the same interface.
 
 %prep
 %setup -q -n %{pypi_name}-%{version}

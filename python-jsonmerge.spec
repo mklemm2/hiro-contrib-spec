@@ -1,25 +1,32 @@
-%{?scl:%scl_package python-jsonschema}
+%{?scl:%scl_package python-jsonmerge}
 %{!?scl:%global pkg_name %{name}}
 
-%global pypi_name jsonschema
+%global pypi_name jsonmerge
 
-Name:           %{?scl_prefix}python-jsonschema
-Version:        2.4.0
+Name:           %{?scl_prefix}python-jsonmerge
+Version:        1.2.1
 Release:        1%{?dist}
-Summary:        An implementation of JSON Schema validation for Python
+Summary:        Merge a series of JSON documents.
 
 License:        MIT
-URL:            http://github.com/Julian/jsonschema
-Source0:        https://files.pythonhosted.org/packages/source/j/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+URL:            https://github.com/avian2/jsonmerge
+Source0:        https://files.pythonhosted.org/packages/source/z/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  %{?scl_prefix_python}python-devel
 BuildRequires:  %{?scl_prefix_python}python-setuptools
 %{?scl:BuildRequires: %{scl}-build %{scl}-runtime}
 %{?scl:Requires: %{scl}-runtime}
+%{?scl:Requires: %{scl}-python-jsonschema}
 
 %description
-Pythonic argument parser, that will make you smile
+This Python module allows you to merge a series of JSON documents into a single one.
+
+This problem often occurs for example when different authors fill in different parts
+of a common document and you need to construct a document that includes contributions
+from all the authors.
+It also helps when dealing with consecutive versions of a document where different
+fields get updated over time.
 
 %prep
 %setup -q -n %{pypi_name}-%{version}
@@ -39,7 +46,6 @@ Pythonic argument parser, that will make you smile
 
 %files
 %{python_sitelib}/%{pypi_name}*
-%{python_scriptdir}/%{pypi_name}*
 
 %changelog
 * Wed Jan 22 2014 John Doe <jdoe@example.com> - 1.9.1-1

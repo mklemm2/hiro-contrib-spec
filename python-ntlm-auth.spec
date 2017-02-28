@@ -8,7 +8,7 @@ Version:        1.0.2
 Release:        1%{?dist}
 Summary:        Creates NTLM authentication structures
 
-License:        GNU Lesser GPL
+License:        LGPLv3
 URL:            https://github.com/jborean93/ntlm-auth
 Source0:        https://files.pythonhosted.org/packages/source/n/%{pypi_name}/%{pypi_name}-%{version}.zip
 

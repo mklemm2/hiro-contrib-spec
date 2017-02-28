@@ -1,30 +1,31 @@
-%{?scl:%scl_package python-ordereddict}
+%{?scl:%scl_package foo-bar}
 %{!?scl:%global pkg_name %{name}}
 
-%global pypi_name ordereddict
+%global pypi_name foo-bar
+%{!?rel:%global rel 1}
 
-Name:           %{?scl_prefix}python-ordereddict
-Version:        1.1
-Release:        1%{?dist}
-Summary:        None
+Name:           %{?scl_prefix}%{pypi_name}
+Version:        0.1
+Release:        %{rel}%{?dist}
+Summary:        Bar function
+Source0:        %{pypi_name}-%{version}.tar.gz
 
 License:        MIT
-URL:            None
-Source0:        https://files.pythonhosted.org/packages/source/o/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  %{?scl_prefix_python}python-devel
 BuildRequires:  %{?scl_prefix_python}python-setuptools
 %{?scl:BuildRequires: %{scl}-build %{scl}-runtime}
-%{?scl:Requires: %{scl}-runtime}
 
 %description
-Drop-in substitute for Py2.7's new collections.OrderedDict. The recipe has big-
-oh performance that matches regular dictionaries (amortized O(1)
-insertion/deletion/lookup and O(n) iteration/repr/copy/equality_testing).
-Originally based on http://code.activestate.com/recipes/576693/
+Bar function
 
 %prep
+cp -ax /home/vagrant/compile/foo/foo-bar /tmp/%{pypi_name}-%{version}
+cd /tmp
+tar -czf /home/vagrant/rpmbuild/SOURCES/%{pypi_name}-%{version}.tar.gz %{pypi_name}-%{version}
+rm -rf %{pypi_name}-%{version}
+cd -
 %setup -q -n %{pypi_name}-%{version}
 
 %build
@@ -41,8 +42,7 @@ Originally based on http://code.activestate.com/recipes/576693/
 %{?scl:"}
 
 %files
-%{python_sitelib}/%{pypi_name}*
-%{python_sitelib}/__pycache__/
+%{python_sitelib}/foo*
 
 %changelog
 * Wed Jan 22 2014 John Doe <jdoe@example.com> - 1.9.1-1
